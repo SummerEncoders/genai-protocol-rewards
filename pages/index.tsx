@@ -38,16 +38,45 @@ const social = [
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
+  const [imageUrl, setImageUrl] = useState("/placeholder.jpeg");
+  const [luckyButtonStatus, setLuckyButtonStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  const handlePromptChange = () => {
-    // TODO
-    return null;
+  const handlePromptChange = (event: any) => {
+    // Update prompt
+    setPrompt(event.target.value);
+    // If the prompt is empty, disable the 'I'm feeling lucky button'
+    if(!event.target.value.trim()){
+      setLuckyButtonStatus(true)
+    }
+    // If the prompt isnt empty, enable the 'I'm feeling lucky button'
+    if(event.target.value.trim()){
+      setLuckyButtonStatus(false)
+    }
   };
 
-  const handleSubmit = () => {
-    // TODO
-    return null;
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    setLoading(true);
+
+    // Generate image - TODO: put generate image code into its own function
+    const response = await fetch('/api/stablediffusion', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ value: prompt }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setImageUrl(data[0]);
+    } else {
+      console.error('Error:', response.statusText);
+    }
+    setLoading(false);
   };
+
 
   const mintNFT = () => {
     // TODO
@@ -132,7 +161,7 @@ export default function Home() {
                     <div className="mt-4 flex items-center justify-center gap-x-6">
                       <button
                         type="submit"
-                        disabled={true}
+                        disabled={luckyButtonStatus}
                         className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
                         I&#39;m Feeling Lucky
@@ -178,10 +207,17 @@ export default function Home() {
             <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl"></div>
+                
+                <div>
+                  {/* PlaceHolder Image Or NFT */}
+                  <Image src={imageUrl} alt="NFT" width="512" height="512" />
+                </div>
+
               </div>
             </div>
           </div>
         </div>
+
       </main>
       <footer className="bg-white">
         <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
