@@ -1,10 +1,13 @@
 import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
+import merge from "lodash.merge";
 import type { AppProps } from "next/app";
 import {
-  RainbowKitProvider,
-  getDefaultWallets,
   connectorsForWallets,
+  getDefaultWallets,
+  lightTheme,
+  RainbowKitProvider,
+  Theme,
 } from "@rainbow-me/rainbowkit";
 import {
   argentWallet,
@@ -36,6 +39,12 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   ],
   [publicProvider()],
 );
+
+const myTheme = merge(lightTheme(), {
+  colors: {
+    accentColor: "#4f46e5",
+  },
+} as Theme);
 
 const projectId = "79e68291741ebb0e75f64ca1ecaf5770";
 
@@ -71,7 +80,11 @@ const wagmiConfig = createConfig({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider appInfo={customAppInfo} chains={chains}>
+      <RainbowKitProvider
+        theme={myTheme}
+        appInfo={customAppInfo}
+        chains={chains}
+      >
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
