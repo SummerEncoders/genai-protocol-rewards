@@ -26,6 +26,7 @@ import {
   zoraTestnet,
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import Layout from "../components/layout";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -85,7 +86,9 @@ export default function App({ Component, pageProps }: AppProps) {
         appInfo={customAppInfo}
         chains={chains}
       >
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </RainbowKitProvider>
     </WagmiConfig>
   );
