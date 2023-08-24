@@ -177,20 +177,42 @@ export default function Home() {
                     </div>
                   </form>
                 </div>
-                <div className="mt-8 flex justify-center aspect-square relative">
-                  <Image
-                    src={imageUrl}
-                    alt="NFT"
-                    priority
-                    width="1024"
-                    height="1024"
-                    style={{
-                      width: "75%",
-                      height: "75%",
-                    }}
-                    className="rounded-lg shadow-2xl"
-                  />
-                </div>
+                {loading && (
+                  <div className="mt-12 flex justify-center">
+                    <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+                  </div>
+                )}
+                {imageUrl && !loading && (
+                  <div className="mt-8 flex justify-center aspect-square relative">
+                    <Image
+                      src={imageUrl}
+                      alt="NFT"
+                      priority
+                      width="1024"
+                      height="1024"
+                      style={{
+                        width: "75%",
+                        height: "75%",
+                      }}
+                      className="rounded-lg shadow-2xl"
+                    />
+                  </div>
+                )}
+                <style jsx>{`
+                  .loader {
+                    animation: spin 1s linear infinite;
+                    border-top-color: #4f46e5;
+                  }
+
+                  @keyframes spin {
+                    0% {
+                      transform: rotate(0deg);
+                    }
+                    100% {
+                      transform: rotate(360deg);
+                    }
+                  }
+                `}</style>
               </div>
             }
 
