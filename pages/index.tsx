@@ -1,40 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const social = [
-  {
-    name: "matangolani",
-    href: "https://github.com/matangolani",
-    icon: (props: any) => (
-      <svg fill="currentColor" viewBox="0 0 496 512" {...props}>
-        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-      </svg>
-    ),
-  },
-  {
-    name: "sina206",
-    href: "https://github.com/sina206",
-    icon: (props: any) => (
-      <svg fill="currentColor" viewBox="0 0 496 512" {...props}>
-        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-      </svg>
-    ),
-  },
-
-  {
-    name: "ivanmolto",
-    href: "https://github.com/ivanmolto",
-    icon: (props: any) => (
-      <svg fill="currentColor" viewBox="0 0 496 512" {...props}>
-        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
-      </svg>
-    ),
-  },
-];
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -78,7 +46,6 @@ export default function Home() {
     setLoading(false);
     setImageText(prompt);
     setPrompt("");
-
   };
 
   const mintNFT = () => {
@@ -88,33 +55,6 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav
-          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-          aria-label="Global"
-        >
-          <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5 flex flex-row">
-              <span className="sr-only">App Name</span>
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className="dark:invert"
-                width={100}
-                height={24}
-                priority
-              />
-              <span className="text-indigo-600 ml-1 mt-2 text-2xl hidden h-10 w-auto sm:block"></span>
-            </a>
-          </div>
-
-          <div className="lg:flex lg:flex-1 lg:justify-end">
-            <div className="text-sm font-semibold leading-6 text-gray-900">
-              <ConnectButton accountStatus={"address"} />
-            </div>
-          </div>
-        </nav>
-      </header>
       <main>
         <div className="relative isolate">
           <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -188,25 +128,25 @@ export default function Home() {
                 )}
                 {imageUrl && !loading && (
                   <div className="truncate">
-                  <div className="mt-8 flex justify-center aspect-square relative">
-                    <Image
-                      src={imageUrl}
-                      alt="NFT"
-                      priority
-                      width="1024"
-                      height="1024"
-                      style={{
-                        width: "75%",
-                        height: "75%",
-                      }}
-                      className="rounded-lg shadow-2xl"
-                    />
+                    <div className="mt-8 flex justify-center aspect-square relative">
+                      <Image
+                        src={imageUrl}
+                        alt="NFT"
+                        priority
+                        width="1024"
+                        height="1024"
+                        style={{
+                          width: "75%",
+                          height: "75%",
+                        }}
+                        className="rounded-lg shadow-2xl"
+                      />
+                    </div>
+                    <div className="text-center -mt-32 text-lg leading-8 text-gray-600 italic mb-16 text-ellipsis overflow-hidden">
+                      {imageText}
+                    </div>
                   </div>
-                  <div className="text-center -mt-32 text-lg leading-8 text-gray-600 italic mb-16 text-ellipsis overflow-hidden">
-                    {imageText}
-                  </div>
-                  </div>
-)}
+                )}
                 <style jsx>{`
                   .loader {
                     animation: spin 1s linear infinite;
@@ -259,55 +199,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="-mt-64 relative -z-16 bg-transparent">
-        <div className="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8">
-          <div className="mt-2 flex justify-center space-x-10 t">
-            {social.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                rel="noreferrer"
-                target="_blank"
-                className="text-gray-400 hover:text-gray-500"
-              >
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </a>
-            ))}
-          </div>
-          <p className="mt-10 text-center text-sm leading-5 text-gray-500 ">
-            Powered by{" "}
-            <a
-              href="https://ens.domains"
-              rel="noreferrer"
-              target="_blank"
-              className="underline hover:text-gray-900"
-            >
-              ENS
-            </a>
-            <br />
-            <br />
-            Made with love for the{" "}
-            <a
-              href="https://www.encode.club/university-hackathon"
-              rel="noreferrer"
-              target="_blank"
-              className="underline hover:text-gray-900"
-            >
-              Future Blockchain University Hackathon
-            </a>{" "}
-            by{" "}
-            <a
-              href="https://www.encode.club"
-              rel="noreferrer"
-              target="_blank"
-              className="underline hover:text-gray-900"
-            >
-              Encode Club
-            </a>
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
