@@ -193,6 +193,7 @@ export default function Home() {
                 </div>
               </div>
             }
+
             <div
               className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
               aria-hidden="true"
@@ -227,9 +228,9 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="bg-white -mt-64 relative z-16 bg-transparent">
-        <div className="mx-auto max-w-7xl overflow-hidden px-6  lg:px-8">
-          <div className="mt-2 flex justify-center space-x-10">
+      <footer className="-mt-64 relative -z-16 bg-transparent">
+        <div className="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8">
+          <div className="mt-2 flex justify-center space-x-10 t">
             {social.map((item) => (
               <a
                 key={item.name}
