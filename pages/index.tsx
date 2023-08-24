@@ -41,6 +41,7 @@ export default function Home() {
   const [imageUrl, setImageUrl] = useState("/placeholder.png");
   const [luckyButtonStatus, setLuckyButtonStatus] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [imageText, setImageText] = useState("");
 
   const handlePromptChange = (event: any) => {
     // Update prompt
@@ -75,6 +76,9 @@ export default function Home() {
       console.error("Error:", response.statusText);
     }
     setLoading(false);
+    setImageText(prompt);
+    setPrompt("");
+
   };
 
   const mintNFT = () => {
@@ -183,6 +187,7 @@ export default function Home() {
                   </div>
                 )}
                 {imageUrl && !loading && (
+                  <div className="truncate">
                   <div className="mt-8 flex justify-center aspect-square relative">
                     <Image
                       src={imageUrl}
@@ -197,7 +202,11 @@ export default function Home() {
                       className="rounded-lg shadow-2xl"
                     />
                   </div>
-                )}
+                  <div className="text-center -mt-32 text-lg leading-8 text-gray-600 italic mb-16 text-ellipsis overflow-hidden">
+                    {imageText}
+                  </div>
+                  </div>
+)}
                 <style jsx>{`
                   .loader {
                     animation: spin 1s linear infinite;
