@@ -38,7 +38,7 @@ const social = [
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
-  const [imageUrl, setImageUrl] = useState("/placeholder.jpeg");
+  const [imageUrl, setImageUrl] = useState("/placeholder.png");
   const [luckyButtonStatus, setLuckyButtonStatus] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -46,12 +46,12 @@ export default function Home() {
     // Update prompt
     setPrompt(event.target.value);
     // If the prompt is empty, disable the 'I'm feeling lucky button'
-    if(!event.target.value.trim()){
-      setLuckyButtonStatus(true)
+    if (!event.target.value.trim()) {
+      setLuckyButtonStatus(true);
     }
     // If the prompt isnt empty, enable the 'I'm feeling lucky button'
-    if(event.target.value.trim()){
-      setLuckyButtonStatus(false)
+    if (event.target.value.trim()) {
+      setLuckyButtonStatus(false);
     }
   };
 
@@ -60,10 +60,10 @@ export default function Home() {
     setLoading(true);
 
     // Generate image - TODO: put generate image code into its own function
-    const response = await fetch('/api/stablediffusion', {
-      method: 'POST',
+    const response = await fetch("/api/stablediffusion", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ value: prompt }),
     });
@@ -72,11 +72,10 @@ export default function Home() {
       const data = await response.json();
       setImageUrl(data[0]);
     } else {
-      console.error('Error:', response.statusText);
+      console.error("Error:", response.statusText);
     }
     setLoading(false);
   };
-
 
   const mintNFT = () => {
     // TODO
@@ -131,21 +130,23 @@ export default function Home() {
               <div className="mt-32 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
                 <div className="text-center">
                   <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-4">
-                    Dream something
-                    <br /> Mint it and Earn Rewards
+                    Mint Your Dreams
+                    <br /> Earn Protocol Rewards
                   </h1>
                   <p className="mt-6 text-lg leading-8 text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
                     <br />
-                    incididunt ut labore et dolore magna aliqua.
+                    <span className="hidden sm:block">
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua
+                    </span>
                   </p>
                 </div>
               </div>
             }
 
             {
-              <div className="-mt-24 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
+              <div className="-mt-16 sm:-mt-24 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
                 <div className="text-center">
                   <form className="mt-2" onSubmit={handleSubmit}>
                     <input
@@ -162,19 +163,33 @@ export default function Home() {
                       <button
                         type="submit"
                         disabled={luckyButtonStatus}
-                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded-xl bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       >
                         I&#39;m Feeling Lucky
                       </button>
                       <button
                         onClick={mintNFT}
                         disabled={true}
-                        className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        className="rounded-xl bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                       >
                         Mint NFT
                       </button>
                     </div>
                   </form>
+                </div>
+                <div className="mt-8 flex justify-center aspect-square relative">
+                  <Image
+                    src={imageUrl}
+                    alt="NFT"
+                    priority
+                    width="1024"
+                    height="1024"
+                    style={{
+                      width: "75%",
+                      height: "75%",
+                    }}
+                    className="rounded-lg shadow-2xl"
+                  />
                 </div>
               </div>
             }
@@ -207,20 +222,13 @@ export default function Home() {
             <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
               <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl"></div>
-                
-                <div>
-                  {/* PlaceHolder Image Or NFT */}
-                  <Image src={imageUrl} alt="NFT" width="512" height="512" />
-                </div>
-
               </div>
             </div>
           </div>
         </div>
-
       </main>
-      <footer className="bg-white">
-        <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+      <footer className="bg-white -mt-64 relative z-16 bg-transparent">
+        <div className="mx-auto max-w-7xl overflow-hidden px-6  lg:px-8">
           <div className="mt-2 flex justify-center space-x-10">
             {social.map((item) => (
               <a
@@ -238,23 +246,16 @@ export default function Home() {
           <p className="mt-10 text-center text-sm leading-5 text-gray-500 ">
             Powered by{" "}
             <a
-              href="https://spruceid.com/"
-              rel="noreferrer"
-              target="_blank"
-              className="underline hover:text-gray-900"
-            >
-              SpruceID
-            </a>{" "}
-            and{" "}
-            <a
               href="https://ens.domains"
               rel="noreferrer"
               target="_blank"
               className="underline hover:text-gray-900"
             >
               ENS
-            </a>{" "}
-            for the{" "}
+            </a>
+            <br />
+            <br />
+            Made with love for the{" "}
             <a
               href="https://www.encode.club/university-hackathon"
               rel="noreferrer"
