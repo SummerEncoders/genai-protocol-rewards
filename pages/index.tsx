@@ -4,10 +4,18 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const sleep = (ms: any) => new Promise((r) => setTimeout(r, ms));
+
 export default function Home() {
+  const [assetName, setAssetName] = useState<string>("");
+  const [symbolName, setSymbolName] = useState<string>("");
+  const [nftDescription, setNftDescription] = useState<string>("");
   const [prompt, setPrompt] = useState("");
+  const [prediction, setPrediction] = useState(null);
+  const [error, setError] = useState(null);
   const [imageUrl, setImageUrl] = useState("/placeholder.png");
   const [luckyButtonStatus, setLuckyButtonStatus] = useState(true);
+  const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageText, setImageText] = useState("");
 
@@ -28,8 +36,7 @@ export default function Home() {
     event.preventDefault();
     setLoading(true);
 
-    // Generate image - TODO: put generate image code into its own function
-    const response = await fetch("/api/stablediffusion", {
+    const response = await fetch("api/stablediffusion", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,15 +44,41 @@ export default function Home() {
       body: JSON.stringify({ value: prompt }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      setImageUrl(data[0]);
-    } else {
-      console.error("Error:", response.statusText);
+    let prediction = await response.json();
+
+    if (response.status !== 201) {
+      setError(prediction.detail);
+      return;
     }
+    console.log(prediction);
+    setPrediction(prediction);
+
+    while (
+      prediction.status !== "succeeded" &&
+      prediction.status !== "failed"
+    ) {
+      await sleep(1000);
+      setAssetName(prediction.id.toUpperCase());
+      setSymbolName(prediction.id.toUpperCase().slice(3));
+
+      const response = await fetch("/api/stablediffusion/" + prediction.id);
+      prediction = await response.json();
+      if (response.status !== 200) {
+        setError(prediction.detail);
+        return;
+      }
+      console.log(prediction);
+
+      setPrediction(prediction);
+    }
+
+    // Generate image - TODO: put generate image code into its own function
+    setImageUrl(prediction.output[prediction.output.length - 1]);
     setLoading(false);
     setImageText(prompt);
+    setNftDescription(prompt);
     setPrompt("");
+    setLuckyButtonStatus(false);
   };
 
   const mintNFT = () => {

@@ -6,7 +6,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['replicate.delivery'],
+    domains: ["pbxt.replicate.delivery"],
   },
 };
 
