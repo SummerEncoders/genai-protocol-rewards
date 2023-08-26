@@ -7,6 +7,16 @@ const nextConfig = {
   },
   images: {
     domains: ["pbxt.replicate.delivery"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "replicate.com",
+      },
+      {
+        protocol: "https",
+        hostname: "replicate.delivery",
+      },
+    ],
   },
 };
 
