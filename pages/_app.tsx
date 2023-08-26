@@ -27,6 +27,9 @@ import {
 } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import Layout from "../components/layout";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
@@ -87,7 +90,9 @@ export default function App({ Component, pageProps }: AppProps) {
         chains={chains}
       >
         <Layout>
-          <Component {...pageProps} />
+          <div className={inter.className}>
+            <Component {...pageProps} />
+          </div>
         </Layout>
       </RainbowKitProvider>
     </WagmiConfig>
