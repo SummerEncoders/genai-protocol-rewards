@@ -1,3 +1,8 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const social = [
   {
     name: "matangolani",
@@ -17,7 +22,6 @@ const social = [
       </svg>
     ),
   },
-
   {
     name: "ivanmolto",
     href: "https://github.com/ivanmolto",
@@ -30,10 +34,67 @@ const social = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="-mt-64 relative -z-16 bg-transparent">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8">
-        <div className="mt-2 flex justify-center space-x-10 t">
+        <nav
+          className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
+          aria-label="Footer"
+        >
+          {pathname === "/" && (
+            <div className="pb-6">
+              <Link
+                href="/features"
+                className="text-base leading-6 text-indigo-500 hover:text-indigo-600"
+              >
+                Features
+              </Link>
+            </div>
+          )}
+          {pathname === "/features" && (
+            <div className="pb-6">
+              <Link
+                href="/"
+                className="text-base leading-6 text-indigo-500 hover:text-indigo-600"
+              >
+                Home
+              </Link>
+            </div>
+          )}
+          {pathname !== "/" && pathname !== "/features" && (
+            <>
+              <div className="pb-6">
+                <Link
+                  href="/"
+                  className="text-base leading-6 text-indigo-500 hover:text-indigo-600"
+                >
+                  Home
+                </Link>
+              </div>
+              <div className="pb-6">
+                <Link
+                  href="/features"
+                  className="text-base leading-6 text-indigo-500 hover:text-indigo-600"
+                >
+                  Features
+                </Link>
+              </div>
+            </>
+          )}
+          <div className="pb-6">
+            <a
+              href="https://github.com/SummerEncoders/genai-protocol-rewards"
+              rel="noreferrer"
+              target="_blank"
+              className="text-base leading-6 text-indigo-500 hover:text-indigo-600"
+            >
+              Codebase
+            </a>
+          </div>
+        </nav>
+        <div className="mt-10 flex justify-center space-x-10 t">
           {social.map((item) => (
             <a
               key={item.name}
@@ -53,7 +114,7 @@ export default function Footer() {
             href="https://ens.domains"
             rel="noreferrer"
             target="_blank"
-            className="underline hover:text-gray-900"
+            className="text-indigo-500 hover:text-indigo-600"
           >
             ENS
           </a>
@@ -64,16 +125,16 @@ export default function Footer() {
             href="https://www.encode.club/university-hackathon"
             rel="noreferrer"
             target="_blank"
-            className="underline hover:text-gray-900"
+            className="text-indigo-500 hover:text-indigo-600"
           >
-            Future Blockchain University Hackathon
+            Future of Blockchain University Hackathon
           </a>{" "}
           by{" "}
           <a
             href="https://www.encode.club"
             rel="noreferrer"
             target="_blank"
-            className="underline hover:text-gray-900"
+            className="text-indigo-500 hover:text-indigo-600"
           >
             Encode Club
           </a>
