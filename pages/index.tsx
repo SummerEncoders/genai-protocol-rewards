@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
+import { zoraNftCreatorV1Config } from "@zoralabs/zora-721-contracts";
+import {
+  useAccount,
+  useChainId,
+  useContractWrite,
+  usePrepareContractWrite,
+} from "wagmi";
 
 const sleep = (ms: any) => new Promise((r) => setTimeout(r, ms));
 
@@ -11,13 +16,15 @@ export default function Home() {
   const [symbolName, setSymbolName] = useState<string>("");
   const [nftDescription, setNftDescription] = useState<string>("");
   const [prompt, setPrompt] = useState("");
-  const [prediction, setPrediction] = useState(null);
+  const [prediction, setPrediction] = useState<any>(null);
   const [error, setError] = useState(null);
   const [imageUrl, setImageUrl] = useState("/placeholder.png");
   const [luckyButtonStatus, setLuckyButtonStatus] = useState(true);
-  const [generated, setGenerated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageText, setImageText] = useState("");
+
+  const { address } = useAccount();
+  const chainId = useChainId();
 
   const handlePromptChange = (event: any) => {
     // Update prompt
@@ -50,7 +57,6 @@ export default function Home() {
       setError(prediction.detail);
       return;
     }
-    console.log(prediction);
     setPrediction(prediction);
 
     while (
@@ -67,12 +73,9 @@ export default function Home() {
         setError(prediction.detail);
         return;
       }
-      console.log(prediction);
-
       setPrediction(prediction);
     }
 
-    // Generate image - TODO: put generate image code into its own function
     setImageUrl(prediction.output[prediction.output.length - 1]);
     setLoading(false);
     setImageText(prompt);
@@ -81,10 +84,68 @@ export default function Home() {
     setLuckyButtonStatus(false);
   };
 
-  const mintNFT = () => {
-    // TODO
-    return null;
-  };
+  // Providing the mint contract information
+
+  const contractName = assetName;
+  const symbol = symbolName;
+  const editionSize = 9999n;
+  const royaltyBps = 0;
+  const fundsRecipient = address!;
+  const defaultAdmin = address!;
+  const description = nftDescription;
+  const animationUri = "0x0";
+  const imageUri = imageUrl;
+  const maxSalePurchasePerAddress = 4294967295;
+  const createReferral = address!;
+
+  const {
+    config,
+    error: prepareError,
+    isError: isPrepareError,
+  } = usePrepareContractWrite({
+    /* Address of the Zora Creator Proxy contract on the Ethereum and 
+    OP Superchain (OP Mainnet, Base, and Zora by now)
+    */
+
+    // @ts-ignore
+    address: zoraNftCreatorV1Config.address[chainId],
+    abi: zoraNftCreatorV1Config.abi,
+    // Function on the contract
+    functionName: "createEditionWithReferral",
+
+    args: [
+      contractName,
+      symbol,
+      editionSize,
+      royaltyBps,
+      fundsRecipient,
+      defaultAdmin,
+      {
+        maxSalePurchasePerAddress,
+        presaleEnd: 0n,
+        presaleStart: 0n,
+        presaleMerkleRoot:
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+        // max value for end date, results in no end date for mint
+        publicSaleEnd: 18446744073709551615n,
+        publicSalePrice: 0n,
+        publicSaleStart: 0n,
+      },
+      description,
+      animationUri,
+      imageUri,
+      createReferral,
+    ],
+  });
+
+  // Writing to the mint contract
+  const {
+    data: contractWriteData,
+    isSuccess,
+    isLoading: isContractWriteLoading,
+    write,
+    error: contractWriteError,
+  } = useContractWrite(config);
 
   return (
     <div className="bg-white">
@@ -103,101 +164,158 @@ export default function Home() {
                 }}
               />
             </div>
-            {
-              <div className="mt-32 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
-                <div className="text-center">
-                  <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-4">
-                    Mint Your Dreams
-                    <br /> Earn Protocol Rewards
-                  </h1>
-                  <p className="mt-6 text-lg leading-8 text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    <br />
-                    <span className="hidden sm:block">
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua
-                    </span>
-                  </p>
-                </div>
+            <div className="mt-24 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl mb-4">
+                  Forge Your Dreams
+                  <br /> Earn Protocol Rewards
+                </h1>
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  The perfect starting point to build your next NFT idea
+                  <br />
+                  <span className="hidden sm:block">
+                    and to earn on-chain rewards even faster.{" "}
+                    <Link href="/features">
+                      <div className="text-indigo-500 hover:text-indigo-600">
+                        Learn more <span aria-hidden="true">→</span>
+                      </div>
+                    </Link>
+                  </span>
+                </p>
               </div>
-            }
-
-            {
-              <div className="-mt-16 sm:-mt-24 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
-                <div className="text-center">
-                  <form className="mt-2" onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      name="prompt"
-                      value={prompt}
-                      onChange={handlePromptChange}
-                      id="prompt"
-                      className="block w-full rounded-md border-0 p-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Enter a prompt to display an image"
+            </div>
+            <div className="-mt-16 sm:-mt-24 mx-auto max-w-2xl py-8 sm:py-12 lg:py-14">
+              <div className="text-center">
+                <form className="mt-2" onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    name="prompt"
+                    value={prompt}
+                    onChange={handlePromptChange}
+                    id="prompt"
+                    className="block w-full rounded-md border-0 p-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="Enter a prompt to display an image"
+                  />
+                  <div className="mt-4 flex items-center justify-center gap-x-6">
+                    <button
+                      type="submit"
+                      disabled={luckyButtonStatus}
+                      className="rounded-xl bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      I&#39;m Feeling Lucky
+                    </button>
+                  </div>
+                </form>
+                {error && <div>{error}</div>}
+                <button
+                  onClick={() => write?.()}
+                  disabled={true}
+                  className="rounded-xl bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                >
+                  Create NFT
+                </button>
+                <div className="text-sm italic text-gray-600">
+                  {prediction && <p>status: {prediction.status}</p>}
+                  {isSuccess && chainId === 8453 && (
+                    <a
+                      target="_blank"
+                      href={`https://basescan.org/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                  {isSuccess && chainId === 84531 && (
+                    <a
+                      target="_blank"
+                      href={`https://goerli.basescan.org/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                  {isSuccess && chainId === 10 && (
+                    <a
+                      target="_blank"
+                      href={`https://optimistic.etherscan.io/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                  {isSuccess && chainId === 420 && (
+                    <a
+                      target="_blank"
+                      href={`https://goerli-optimism.etherscan.io/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                  {isSuccess && chainId === 999 && (
+                    <a
+                      target="_blank"
+                      href={`https://testnet.explorer.zora.energy/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                  {isSuccess && chainId === 7777777 && (
+                    <a
+                      target="_blank"
+                      href={`https://explorer.zora.energy/tx/${contractWriteData?.hash}`}
+                      rel="noreferrer"
+                    >
+                      View Transaction
+                    </a>
+                  )}
+                </div>
+                {error && <div>{error}</div>}
+              </div>
+              {loading && (
+                <div className="mt-12 flex justify-center">
+                  <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+                </div>
+              )}
+              {imageUrl && !loading && (
+                <div className="truncate">
+                  <div className="mt-8 flex justify-center aspect-square relative">
+                    <Image
+                      src={imageUrl}
+                      alt="output"
+                      priority
+                      width="1024"
+                      height="1024"
+                      style={{
+                        width: "75%",
+                        height: "75%",
+                      }}
+                      className="rounded-lg shadow-2xl"
                     />
+                  </div>
 
-                    <div className="mt-4 flex items-center justify-center gap-x-6">
-                      <button
-                        type="submit"
-                        disabled={luckyButtonStatus}
-                        className="rounded-xl bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                        I&#39;m Feeling Lucky
-                      </button>
-                      <button
-                        onClick={mintNFT}
-                        disabled={true}
-                        className="rounded-xl bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                      >
-                        Mint NFT
-                      </button>
-                    </div>
-                  </form>
+                  <div className="text-center -mt-32 text-lg leading-8 text-gray-600 italic mb-16 text-ellipsis overflow-hidden">
+                    {imageText}
+                  </div>
                 </div>
-                {loading && (
-                  <div className="mt-12 flex justify-center">
-                    <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
-                  </div>
-                )}
-                {imageUrl && !loading && (
-                  <div className="truncate">
-                    <div className="mt-8 flex justify-center aspect-square relative">
-                      <Image
-                        src={imageUrl}
-                        alt="NFT"
-                        priority
-                        width="1024"
-                        height="1024"
-                        style={{
-                          width: "75%",
-                          height: "75%",
-                        }}
-                        className="rounded-lg shadow-2xl"
-                      />
-                    </div>
-                    <div className="text-center -mt-32 text-lg leading-8 text-gray-600 italic mb-16 text-ellipsis overflow-hidden">
-                      {imageText}
-                    </div>
-                  </div>
-                )}
-                <style jsx>{`
-                  .loader {
-                    animation: spin 1s linear infinite;
-                    border-top-color: #4f46e5;
-                  }
+              )}
+              <style jsx>{`
+                .loader {
+                  animation: spin 1s linear infinite;
+                  border-top-color: #4f46e5;
+                }
 
-                  @keyframes spin {
-                    0% {
-                      transform: rotate(0deg);
-                    }
-                    100% {
-                      transform: rotate(360deg);
-                    }
+                @keyframes spin {
+                  0% {
+                    transform: rotate(0deg);
                   }
-                `}</style>
-              </div>
-            }
-
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              `}</style>
+            </div>
             <div
               className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
               aria-hidden="true"
