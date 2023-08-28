@@ -79,7 +79,7 @@ With Zora Protocol Rewards, users enjoy a seamless and transparent on-chain earn
 
 ![entering prompt](./presentation/prompt.png "entering prompt")
 
-### 4. "Press Create NFT" Button
+### 4. Press "Create NFT" Button
 
 ![generating image](./presentation/gen.png "generating image")
 
