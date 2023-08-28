@@ -12,7 +12,7 @@ const features = [
   {
     name: "Text-to-image generation",
     description:
-      "The latest and most powerful version of Stable Diffusion it is just a prompt from you.",
+      "The latest and most powerful version of Stable Diffusion is just a prompt away from you.",
     icon: SparklesIcon,
   },
   {
