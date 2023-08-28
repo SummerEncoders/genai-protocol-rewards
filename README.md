@@ -87,9 +87,15 @@ With Zora Protocol Rewards, users enjoy a seamless and transparent on-chain earn
 
 ![pressing mint NFT button](./presentation/mint.png "pressing mint NFT button")
 
-### 6. Manage images on minting page
+![NFT edition created](./presentation/mint-2.png "NFT edition created")
 
-![minting page](./presentation/zora.png "minting page")
+### 6. Manage NFT Edition
+
+![manage NFT edition](./presentation/manage.png "manage NFT edition")
+
+### 7. Minting page
+
+![minting page](./presentation/nft.png "minting page")
 
 ## Tech stack
 
