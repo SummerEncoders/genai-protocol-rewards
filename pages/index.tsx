@@ -218,23 +218,28 @@ export default function Home() {
                     </div>
                   </form>
                   {error && <div>{error}</div>}
-
-                  <button
-                    onClick={() => write?.()}
-                    disabled={!write}
-                    className="rounded-xl bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Create NFT
-                  </button>
+                  {nftDescription !== "" && (
+                    <button
+                      onClick={() => write?.()}
+                      disabled={!write}
+                      className="mt-8 rounded-xl bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                      Create NFT
+                    </button>
+                  )}
                   <div className="text-sm italic text-gray-600">
-                    {prediction && <p>status: {prediction.status}</p>}
+                    {prediction && (
+                      <p className="mt-2 mb-2">status: {prediction.status}</p>
+                    )}
                     {isSuccess && chainId === 1 && (
                       <a
                         target="_blank"
                         href={`https://etherscan.io/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 5 && (
@@ -243,7 +248,9 @@ export default function Home() {
                         href={`https://goerli.etherscan.io/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 8453 && (
@@ -252,7 +259,9 @@ export default function Home() {
                         href={`https://basescan.org/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 84531 && (
@@ -261,7 +270,9 @@ export default function Home() {
                         href={`https://goerli.basescan.org/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 10 && (
@@ -270,7 +281,9 @@ export default function Home() {
                         href={`https://optimistic.etherscan.io/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 420 && (
@@ -279,7 +292,9 @@ export default function Home() {
                         href={`https://goerli-optimism.etherscan.io/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 999 && (
@@ -288,7 +303,9 @@ export default function Home() {
                         href={`https://testnet.explorer.zora.energy/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
                     {isSuccess && chainId === 7777777 && (
@@ -297,9 +314,57 @@ export default function Home() {
                         href={`https://explorer.zora.energy/tx/${contractWriteData?.hash}`}
                         rel="noreferrer"
                       >
-                        View Transaction <span aria-hidden="true">→</span>
+                        <span className="text-indigo-500 hover:text-indigo-600">
+                          View Transaction{" "}
+                        </span>
                       </a>
                     )}
+                    <div className="mt-2"></div>
+                    {isSuccess &&
+                      (chainId === 1 ||
+                        chainId === 8453 ||
+                        chainId === 10 ||
+                        chainId === 999) && (
+                        <a
+                          target="_blank"
+                          href="https://zora.co/manage"
+                          rel="noreferrer"
+                        >
+                          <span className="text-indigo-500 hover:text-indigo-600">
+                            Manage your NFT Edition in the dashboard{" "}
+                          </span>
+                          <span
+                            className="text-indigo-500
+                          hover:text-indigo-600"
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </a>
+                      )}
+
+                    {isSuccess &&
+                      (chainId === 5 ||
+                        chainId === 84531 ||
+                        chainId === 420 ||
+                        chainId === 7777777) && (
+                        <a
+                          target="_blank"
+                          href="https://testnet.zora.co/manage"
+                          rel="noreferrer"
+                        >
+                          <span className="text-indigo-500 hover:text-indigo-600">
+                            Manage your NFT Edition in the dashboard{" "}
+                          </span>
+                          <span
+                            className="text-indigo-500
+                          hover:text-indigo-600"
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </a>
+                      )}
                   </div>
                   {error && <div>{error}</div>}
                 </div>
