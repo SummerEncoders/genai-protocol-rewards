@@ -81,7 +81,7 @@ With Zora Protocol Rewards, users enjoy a seamless and transparent on-chain earn
 
 ### 4. Press "Create NFT" Button
 
-![generating image](./presentation/gen.png "generating image")
+![generating image](./presentation/genai.png "generating image")
 
 ### 5. Confirm Transaction Fees
 
