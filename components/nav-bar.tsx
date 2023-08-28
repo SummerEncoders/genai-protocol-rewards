@@ -10,10 +10,10 @@ export default function NavBar() {
       >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5 flex flex-row">
-            <span className="sr-only">App Name</span>
+            <span className="sr-only">GenNFTs</span>
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
+              src="/gennfts.svg"
+              alt="GenNFTs Logo"
               className="dark:invert"
               width={100}
               height={24}
