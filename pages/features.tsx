@@ -30,7 +30,7 @@ const features = [
   {
     name: "Monetize Your Work",
     description:
-      "With Zora Protocol Rewards we provide the best experience to earn onchain.",
+      "With Zora Protocol Rewards we provide the best experience to earn on-chain.",
     icon: BanknotesIcon,
   },
   {
