@@ -1,25 +1,25 @@
 # GenNFT Forge
+
 ---
 
-GenNFT Forge  is the perfect starting point to build your next NFT idea
+GenNFT Forge is the perfect starting point to build your next NFT idea
 and to earn on-chain rewards even faster.
 
 GenNFT Forge is a web application that allows you to enter prompts into a generative AI, and then create smart contracts for the end user, which they can then mint.
 
 ## How it works:
- 1. Connect your wallet
- 2. Enter a prompt 
-3. Click to call the contract
 
-### 1. 
+1.  Connect your wallet
+2.  Enter a prompt
+3.  Click to call the contract
+
+### 1.
 
 In order to get started the user must connect a wallet. This is done via RainbowKit, a React library that allows you to easily add wallet connection to your dapp.
-
 
 ### 2.
 
 Once your wallet is connected, you can then enter any prompt to StableDiffusion (a text-to-image diffusion model capable of generating photo-realistic images given any text input) via its API.
-
 
 ### 3.
 
@@ -39,14 +39,13 @@ https://github.com/matangolani
 
 ---
 
-
 ### Benefits:
 
-- Only ENS names are whitelisted.  
+- Only ENS names are whitelisted.
 
 Whitelisting ENS names on a web app for minting NFTs can significantly enhance the security and trustworthiness of the platform. ENS names are Ethereum domain names that map to blockchain addresses. By whitelisting ENS names, the platform can ensure that only verified and legitimate users are able to mint NFTs. This prevents unauthorized access and reduces the likelihood of fraudulent activities.
 
-- Creative Expression 
+- Creative Expression
 
 The app empowers users to express their creativity by providing them with a tool to generate unique images based on their prompts. Users can experiment with various inputs to produce diverse and imaginative artworks.
 
@@ -61,22 +60,28 @@ With Zora Protocol Rewards, users enjoy a seamless and transparent onchain earni
 ## Step by step guide:
 
 ### 1. Connect Wallet
-![home](./welcome.png "home page")
+
+![home](./presentation/welcome.png "home page")
 
 ### 2. Enter Prompt
-![adding wallet](./wallet.png "adding wallet")
+
+![adding wallet](./presentation/wallet.png "adding wallet")
 
 ### 3. Press "I'm Feeling Lucky" Button
-![entering prompt](./prompt.png "entering prompt")
+
+![entering prompt](./presentation/prompt.png "entering prompt")
 
 ### 4. "Press Create NFT" Button
-![generating image](./gen.png "generating image")
+
+![generating image](./presentation/gen.png "generating image")
 
 ### 5. Confirm Transaction Fees
-![pressing mint NFT button](./mint.png "pressing mint NFT button")
+
+![pressing mint NFT button](./presentation/mint.png "pressing mint NFT button")
 
 ### 6. Manage images on minting page
-![minting page](./zora.png "minting page")
+
+![minting page](./presentation/zora.png "minting page")
 
 ## Set Up
 
