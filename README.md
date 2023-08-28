@@ -2,16 +2,28 @@
 
 ---
 
-GenNFT Forge is the perfect starting point to build your next NFT idea
-and to earn on-chain rewards even faster.
+GenNFT Forge is the perfect starting point to build your next NFT idea and to earn on-chain rewards even faster.
 
-GenNFT Forge is a web application that allows you to enter prompts into a generative AI, and then create smart contracts for the end user, which they can then mint.
+GenNFT Forge is a web application that allows you to enter prompts into a generative AI, and then create NFT Editions ready to be minted.
+
+The end users are the owners of their own NFT smart contracts created via the Zora NFT Creator proxy.
+They can manage their NFT edition, rewards and mint page in https://zora.co/manage (or https://testnet.zora.co/manage in the testnets)
+
+This Project was made specifically for the Future of Blockchain University Hackathon by Encode Club.
+
+It was planned, developed, and tested by the following team members of the SummerEncoders team:
+
+https://github.com/matangolani
+
+https://github.com/sina206
+
+https://github.com/ivanmolto
 
 ## How it works:
 
 1.  Connect your wallet
 2.  Enter a prompt
-3.  Click to call the contract
+3.  Create NFT edition (smart contract)
 
 ### 1.
 
@@ -25,21 +37,7 @@ Once your wallet is connected, you can then enter any prompt to StableDiffusion 
 
 The application then calls the Zora NFT Creator Proxy with some dynamic and static data including the image url , which then contract for the end user to manage in a minting page.
 
----
-
-This Project was made specifically for the Future of Blockchain University Hackathon by Encode Club.
-
-It was planned, developed, and tested by the following team members of the SummerEncoders team:
-
-https://github.com/ivanmolto
-
-https://github.com/sina206
-
-https://github.com/matangolani
-
----
-
-### Benefits:
+## Benefits:
 
 - Only ENS names are whitelisted.
 
@@ -52,10 +50,6 @@ The app empowers users to express their creativity by providing them with a tool
 - Zora Protocol Rewards .
 
 With Zora Protocol Rewards, users enjoy a seamless and transparent onchain earning experience, ensuring security and trust through direct blockchain interactions. This empowers participants with ownership and control over their rewards, fostering a decentralized and user-centric ecosystem.
-
-## Working Demo
-
-<video src="demo.mp4" width="320" height="240" controls></video>
 
 ## Step by step guide:
 
@@ -83,11 +77,17 @@ With Zora Protocol Rewards, users enjoy a seamless and transparent onchain earni
 
 ![minting page](./presentation/zora.png "minting page")
 
+## Tech stack
+
+GenNFT Forge uses [Stable Diffusion](https://stability.ai/blog/stable-diffusion-public-release) and the [Zora](https://zora.co) NFT ERC721 Editions NFT creator on the Ethereum Mainnet, OP Mainnet, Base, and Zora (including their testnets).
+
+It is built using [NextJS](https://nextjs.org), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [RainbowKit](https://www.rainbowkit.com), [Wagmi](https://wagmi.sh), and [Tailwind CSS](https://tailwindcss.com/).
+
 ## Set Up
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Getting Started
 
 First, run the development server:
 
@@ -109,7 +109,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -118,8 +118,12 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## License
+
+The code is licensed under a MIT License.
