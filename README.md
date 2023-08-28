@@ -25,7 +25,7 @@ You can check a live demo of GenNFT Forge by going to https://www.gennfts.xyz or
 
 ## Video Pitch
 
-You can watch a video pitch of GenNFT Forge by going to or just clicking [here]()
+You can watch a video pitch of GenNFT Forge by clicking [here](https://apricot-super-cod-431.mypinata.cloud/ipfs/QmQKRSsxNDuENyRodRsQo2E3EGP1Lu9GDCF74ddQC3P7XE?_gl=1*8u7bem*_ga*MTA2NjkyNTA3LjE2OTMyMzIyMzQ.*_ga_5RMPXG14TE*MTY5MzIzMjIzNC4xLjEuMTY5MzIzMjQ0OS42MC4wLjA)
 
 ## How it works:
 
