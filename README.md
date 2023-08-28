@@ -7,7 +7,7 @@ GenNFT Forge is the perfect starting point to build your next NFT idea and to ea
 GenNFT Forge is a web application that allows you to enter prompts into a generative AI, and then create NFT Editions ready to be minted.
 
 The end users are the owners of their own NFT smart contracts created via the Zora NFT Creator proxy.
-They can manage their NFT edition, rewards and mint page in https://zora.co/manage (or https://testnet.zora.co/manage in the testnets)
+They can manage their NFT editions, rewards and mint page in https://zora.co/manage (or https://testnet.zora.co/manage in the testnets)
 
 This Project was made specifically for the Future of Blockchain University Hackathon by Encode Club.
 
@@ -19,11 +19,19 @@ https://github.com/sina206
 
 https://github.com/ivanmolto
 
+## Live Demo
+
+You can check a live demo of GenNFT Forge by going to https://www.gennfts.xyz or just clicking [here](https://www.gennfts.xyz)
+
+## Video Pitch
+
+You can watch a video pitch of GenNFT Forge by going to or just clicking [here]()
+
 ## How it works:
 
 1.  Connect your wallet
 2.  Enter a prompt
-3.  Create NFT edition (smart contract)
+3.  Create an NFT edition (smart contract)
 
 ### 1.
 
@@ -35,21 +43,27 @@ Once your wallet is connected, you can then enter any prompt to StableDiffusion 
 
 ### 3.
 
-The application then calls the Zora NFT Creator Proxy with some dynamic and static data including the image url , which then contract for the end user to manage in a minting page.
+The application then calls the Zora NFT Creator Proxy with some dynamic and static data including the image url from Stable Diffusion and the prompt as the NFT description. Once the NFT Edition is created you can manage it from the Zora Manage dashboard (https://zora.co/manage or https://testnet.zora.co/manage) including a minting page.
 
 ## Benefits:
 
-- Only ENS names are whitelisted.
+- Showcase ENS name and avatar.
 
-Whitelisting ENS names on a web app for minting NFTs can significantly enhance the security and trustworthiness of the platform. ENS names are Ethereum domain names that map to blockchain addresses. By whitelisting ENS names, the platform can ensure that only verified and legitimate users are able to mint NFTs. This prevents unauthorized access and reduces the likelihood of fraudulent activities.
+GenNFT Forge showcase the ENS name and avatar of an wallet address in case it has it has an ENS name associated. We do it not only in Ethereum but in the Superchain too (OP, Base and Zora blockchains).
+
+As an extra bonus we thought to whitelist the use of our web app only to wallets with ENS names but it was only possible for the Ethereum Mainnet (in our case via RainbowKit).
+Whitelisting the use of our service for minting NFTs to wallet addresses with an ENS name would significantly enhance the security and trustworthiness of the platform. And promoting us as a Paymaster/sponsor of the service to all the ENS community.
+
+ENS names are Ethereum domain names that map to blockchain addresses.
+Whitelisting ENS names would reduces the potential likelihood of fraudulent activities and draining economic resources.
 
 - Creative Expression
 
 The app empowers users to express their creativity by providing them with a tool to generate unique images based on their prompts. Users can experiment with various inputs to produce diverse and imaginative artworks.
 
-- Zora Protocol Rewards .
+- Zora Protocol Rewards
 
-With Zora Protocol Rewards, users enjoy a seamless and transparent onchain earning experience, ensuring security and trust through direct blockchain interactions. This empowers participants with ownership and control over their rewards, fostering a decentralized and user-centric ecosystem.
+With Zora Protocol Rewards, users enjoy a seamless and transparent on-chain earning experience, ensuring security and trust through direct blockchain interactions. This empowers participants with ownership and control over their rewards, fostering a decentralized and user-centric ecosystem.
 
 ## Step by step guide:
 
