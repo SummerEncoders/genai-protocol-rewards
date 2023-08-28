@@ -14,9 +14,8 @@ export default function NavBar() {
             <Image
               src="/gennfts.svg"
               alt="GenNFTs Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
+              width={30}
+              height={30}
               priority
             />
             <span className="text-indigo-600 ml-1 mt-2 text-2xl hidden h-10 w-auto sm:block"></span>
