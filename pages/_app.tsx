@@ -53,13 +53,13 @@ const myTheme = merge(lightTheme(), {
 const projectId = "79e68291741ebb0e75f64ca1ecaf5770";
 
 const { wallets } = getDefaultWallets({
-  appName: "App Name",
+  appName: "GenNFTs",
   projectId,
   chains,
 });
 
 const customAppInfo = {
-  appName: "App Name",
+  appName: "GenNFTs",
 };
 
 const connectors = connectorsForWallets([
