@@ -40,7 +40,7 @@ export default function Footer() {
     <footer className="-mt-64 relative -z-16 bg-transparent">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8">
         <nav
-          className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
+          className="-mb-6 columns-2 flex justify-center space-x-12"
           aria-label="Footer"
         >
           {pathname === "/" && (
